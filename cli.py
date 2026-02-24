@@ -29,7 +29,7 @@ def main():
             warnings.simplefilter("always")
             results = rank_to_percentile(records)
         for w in caught:
-            print(f"Warning: {w.message}", file=sys.stderr, flush=True)
+            print(str(w.message), file=sys.stderr, flush=True)
     except ValueError as e:
         sys.exit(f"Error: {e}")
 

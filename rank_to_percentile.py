@@ -111,7 +111,7 @@ def rank_to_percentile(records):
                       for g2 in present[i + 1:]
                       if mins[g1] < maxs[g2]]
         if violations:
-            lines = ["scores are inconsistent with letter grades:"]
+            lines = ["Warning: scores are inconsistent with letter grades:"]
             for g1, mn, g2, mx in violations:
                 lines.append(f"  {g1} (min {mn}) < {g2} (max {mx})")
             warnings.warn("\n".join(lines), UserWarning, stacklevel=2)
