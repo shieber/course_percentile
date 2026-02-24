@@ -29,6 +29,15 @@ Upload a CSV file (**no header**) with columns: `id, letter_grade[, score]`
 - Lines starting with `#` are treated as comments and ignored
 """)
 
+st.warning(
+    "**Privacy notice:** uploaded files are processed on Streamlit's servers. "
+    "Do not upload files containing real student IDs or other identifying "
+    "information. To process sensitive data locally, download the code and "
+    "use the command-line tool instead — see the "
+    "[course\\_percentile repository](https://github.com/shieber/course_percentile) "
+    "for instructions."
+)
+
 uploaded = st.file_uploader("Choose a CSV file", type=["csv", "txt"])
 
 if uploaded is not None:

@@ -2,13 +2,29 @@
 
 Computes percentile ranks for students from letter grades and optional scores.
 
+## Privacy
+
+**For data containing real student IDs or other identifying information,
+use the command-line tool locally** (see below). The web app processes files
+on Streamlit's servers and should only be used with pseudonymized or
+non-sensitive data.
+
 ## Usage
 
-### Command line
+### Command line (recommended for real student data)
+
+Clone or download the repository, then:
 
 ```bash
+# install dependencies (only needed once)
+pip install -r requirements.txt
+
+# run
 python cli.py <input.csv> <output.csv>
 ```
+
+Warnings about score inconsistencies are printed to stderr; errors cause
+a non-zero exit with a message. No data leaves your machine.
 
 ### Web app
 
