@@ -11,9 +11,10 @@ from rank_to_percentile import rank_to_percentile
 
 st.title("Course Grade Percentile Ranker")
 
-st.caption(
-    "For the full methodology and worked examples, see "
-    "[Background](/Background)."
+st.markdown(
+    "<span style='color: gray'>For the full methodology and worked examples, see "
+    "<a href='/Background' target='_self'>Background</a>.</span>",
+    unsafe_allow_html=True,
 )
 
 st.markdown("""
