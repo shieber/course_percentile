@@ -13,7 +13,7 @@ import csv
 import sys
 import warnings
 
-from rank_to_percentile import rank_to_percentile
+from rank_to_percentile import rank_to_percentile, strip_header
 
 
 def main():
@@ -23,6 +23,9 @@ def main():
     with open(sys.argv[1], newline='') as f:
         records = [row for row in csv.reader(f)
                    if row and not row[0].strip().startswith('#')]
+    records, had_header = strip_header(records)
+    if had_header:
+        print("Note: header row detected and skipped.", file=sys.stderr)
 
     try:
         with warnings.catch_warnings(record=True) as caught:

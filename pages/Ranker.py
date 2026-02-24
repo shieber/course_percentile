@@ -7,7 +7,7 @@ import warnings
 
 import streamlit as st
 
-from rank_to_percentile import rank_to_percentile
+from rank_to_percentile import rank_to_percentile, strip_header
 
 st.title("Course Grade Percentile Ranker")
 
@@ -76,6 +76,7 @@ else:
 if text is not None:
     records = [row for row in csv.reader(io.StringIO(text))
                if row and not row[0].strip().startswith('#')]
+    records, had_header = strip_header(records)
 
     with st.expander("Preview input"):
         st.code(text, language="text")
@@ -102,9 +103,10 @@ if text is not None:
 
         n_ranked = sum(1 for r in results if r[2] is not None)
         n_pa = sum(1 for r in results if r[2] is None)
+        note = " (header row skipped)" if had_header else ""
         st.success(
             f"Processed {len(results)} rows "
-            f"({n_ranked} ranked, {n_pa} PA)."
+            f"({n_ranked} ranked, {n_pa} PA){note}."
         )
 
         st.download_button(

@@ -2,16 +2,9 @@
 
 Computes percentile ranks for students from letter grades and optional scores.
 
-## Privacy
-
-**For data containing real student IDs or other identifying information,
-use the command-line tool locally** (see below). The web app processes files
-on Streamlit's servers and should only be used with pseudonymized or
-non-sensitive data.
-
 ## Usage
 
-### Command line (recommended for real student data)
+### Command line
 
 Clone or download the repository, then:
 
@@ -26,11 +19,36 @@ python cli.py <input.csv> <output.csv>
 Warnings about score inconsistencies are printed to stderr; errors cause
 a non-zero exit with a message. No data leaves your machine.
 
-### Web app
+### Local web app
 
 ```bash
 streamlit run app.py
 ```
+
+Runs entirely on your machine. No data leaves your machine.
+
+### Hosted web app
+
+A hosted version is available at
+[course-percentile.streamlit.app](https://course-percentile.streamlit.app).
+Uploaded files are processed on Streamlit's servers, so **do not upload
+files containing real student IDs or other identifying information**.
+
+To use the hosted app with sensitive data, you can anonymize locally first:
+
+```bash
+# 1. Anonymize — replaces IDs with random tokens, shuffles rows
+python anon.py grades.csv          # → grades_anon.csv + mapping.csv
+
+# 2. Upload grades_anon.csv to the hosted app, download percentile_ranks.csv
+
+# 3. Restore real IDs locally (mode auto-detected from mapping.csv)
+python anon.py percentile_ranks.csv   # → percentile_ranks_deanon.csv
+```
+
+`mapping.csv` is the only link between tokens and real IDs — keep it private.
+Use `-m` to specify a non-default mapping file, `-o` for a non-default output.
+Deanonymized output is restored to the original input row order.
 
 ## Input format
 

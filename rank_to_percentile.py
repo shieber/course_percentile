@@ -7,6 +7,10 @@ rank_to_percentile(records) -> list of (id, grade, pct) tuples
     records : iterable of (id, grade) or (id, grade, score) sequences.
     pct is a float (0-100) or None for PA students.
 
+strip_header(records) -> (records, had_header)
+    Drop the first row if it looks like a header (grade field not a valid
+    grade). Returns the (possibly trimmed) list and a boolean flag.
+
 Raises ValueError for invalid input.
 Warns (UserWarning) if scores are inconsistent with grade order.
 """
@@ -22,6 +26,18 @@ GPA['E'] = GPA['FL'] = 0       # both failing grades have GPA value 0
 VALID_GRADES = set(GRADES) | {'PA'}
 BOTTOM = {'E', 'FL'}            # merged into one bucket for ranking/consistency
 Row    = namedtuple('Row', ['idx', 'id', 'grade', 'score'])
+
+
+def strip_header(records):
+    """Drop the first row if its grade field is not a valid grade.
+
+    Returns (records, had_header). Intended for use in I/O layers before
+    passing records to rank_to_percentile().
+    """
+    if records and (len(records[0]) < 2
+                    or str(records[0][1]).strip() not in VALID_GRADES):
+        return records[1:], True
+    return list(records), False
 
 
 def rank_to_percentile(records):
