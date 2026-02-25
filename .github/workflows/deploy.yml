@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare site
+        run: |
+          mkdir _site
+          # web/ files go under web/ so that ../rank_to_percentile.py resolves correctly
+          cp -r web _site/
+          cp rank_to_percentile.py _site/
+          # Root redirect so https://shieber.github.io/course_percentile/ works
+          echo '<meta http-equiv="refresh" content="0; url=web/">' > _site/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
