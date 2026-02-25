@@ -102,6 +102,11 @@ def deanonymize(input_path, output_path, mapping_path):
         rows = [r for r in csv.reader(f)
                 if r and not r[0].strip().startswith('#')]
 
+    # Pass header row through unchanged if present
+    header = None
+    if rows and rows[0][0].strip() not in mapping:
+        header, rows = rows[0], rows[1:]
+
     indexed = []
     for i, row in enumerate(rows, 1):
         token = row[0].strip()
@@ -114,7 +119,10 @@ def deanonymize(input_path, output_path, mapping_path):
     output = [row for _, row in indexed]
 
     with open(output_path, 'w', newline='') as f:
-        csv.writer(f).writerows(output)
+        writer = csv.writer(f)
+        if header:
+            writer.writerow(header)
+        writer.writerows(output)
     print(f"Deanonymized {len(output)} rows → {output_path}")
 
 

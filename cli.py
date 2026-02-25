@@ -2,8 +2,8 @@
 """
 Usage: python cli.py <input.csv> <output.csv>
 
-Reads a CSV file (no header): id, letter_grade[, score]
-Writes a CSV file (no header): id, letter_grade, percentile_rank
+Reads a CSV file: id, letter_grade[, score]  (header row auto-detected)
+Writes a CSV file: Student ID, Letter Grade, Percentile Rank
 
 Lines starting with # are treated as comments and ignored.
 PA students receive NA as percentile rank.
@@ -38,6 +38,7 @@ def main():
 
     with open(sys.argv[2], 'w', newline='') as f:
         writer = csv.writer(f)
+        writer.writerow(['Student ID', 'Letter Grade', 'Percentile Rank'])
         for id_, grade, pct in results:
             writer.writerow([id_, grade,
                              f"{pct:.1f}" if pct is not None else "NA"])

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Grade Percentile Ranker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Course Grade Percentile Ranker</h1>
+  <p class="subtitle">
+    For the full methodology and worked examples, see the
+    <a href="background.html">Background page</a>.
+  </p>
+
+  <div class="privacy-notice">
+    <strong>Privacy:</strong> all computation happens in your browser.
+    No data is sent to any server.
+  </div>
+
+  <div class="instructions">
+    Upload a CSV file with columns:
+    <code>id, letter_grade[, score]</code>
+    <br>
+    Valid grades: <code>A  A-  B+  B  B-  C+  C  C-  D+  D  D-  E  FL  PA</code><br>
+    <code>score</code> is optional; higher is better; omit for all rows or provide for all<br>
+    <code>PA</code> students are excluded from ranking and receive <code>NA</code><br>
+    <code>FL</code> students rank equally with <code>E</code>, sorted by score<br>
+    Lines starting with <code>#</code> are treated as comments and ignored
+  </div>
+
+  <div id="pyodide-status" class="loading">Loading Python runtime…</div>
+
+  <div class="upload-row">
+    <label class="file-label" for="file-input">Choose CSV file</label>
+    <input type="file" id="file-input" accept=".csv,.txt">
+    <span id="file-name">No file chosen</span>
+    <button id="reset-btn" onclick="resetApp()">Reset</button>
+  </div>
+
+  <div id="header-notice" class="notice"></div>
+  <div id="warning-box"  class="warning-box"></div>
+  <div id="error-box"    class="error-box"></div>
+  <div id="success-box"  class="success-box"></div>
+
+  <button id="download-btn" onclick="downloadResult()">
+    Download percentile ranks CSV
+  </button>
+
+  <details id="input-preview"  style="display:none">
+    <summary>Preview input</summary>
+    <pre id="input-pre"></pre>
+  </details>
+
+  <details id="output-preview" style="display:none">
+    <summary>Preview output</summary>
+    <pre id="output-pre"></pre>
+  </details>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

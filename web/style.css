@@ -1,0 +1,260 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: #f7f7f8;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.4rem; }
+
+.subtitle {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ---- notification boxes ---- */
+
+.privacy-notice {
+  background: #fff8e1;
+  border-left: 4px solid #f9a825;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+  color: #555;
+}
+
+.notice {
+  background: #e8f4fd;
+  border-left: 4px solid #1976d2;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: #1a4a6b;
+  display: none;
+}
+
+.warning-box {
+  background: #fff3e0;
+  border-left: 4px solid #e65100;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: #5d2600;
+  white-space: pre-wrap;
+  display: none;
+}
+
+.error-box {
+  background: #fdecea;
+  border-left: 4px solid #c62828;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: #7f0000;
+  display: none;
+}
+
+.success-box {
+  background: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: #1b5e20;
+  display: none;
+}
+
+/* ---- instructions box ---- */
+
+.instructions {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.instructions code {
+  background: #f0f0f0;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.87em;
+}
+
+/* ---- upload row ---- */
+
+.upload-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+label.file-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+label.file-label:hover { border-color: #888; }
+
+#file-input { display: none; }
+
+#file-name {
+  color: #555;
+  font-size: 0.88rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- buttons ---- */
+
+button {
+  padding: 0.5rem 1.1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#reset-btn           { background: #f0f0f0; color: #333; }
+#reset-btn:hover     { background: #e0e0e0; }
+
+#download-btn        { background: #1976d2; color: #fff; display: none; margin-bottom: 1rem; }
+#download-btn:hover  { background: #1565c0; }
+
+/* ---- previews ---- */
+
+details {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+summary {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #555;
+  user-select: none;
+}
+
+summary:hover { color: #111; }
+
+pre {
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  background: #fafafa;
+  border-top: 1px solid #e0e0e0;
+  margin: 0;
+}
+
+/* ---- loading indicator ---- */
+
+.loading {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* ---- background page ---- */
+
+.prose h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2rem 0 0.6rem;
+}
+
+.prose h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.4rem 0 0.5rem;
+}
+
+.prose p   { margin-bottom: 0.85rem; line-height: 1.65; }
+.prose ul  { margin: 0 0 0.85rem 1.4rem; line-height: 1.65; }
+.prose li  { margin-bottom: 0.25rem; }
+
+.prose code {
+  background: #f0f0f0;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.87em;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 2rem 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid #ccc;
+  margin: 0 0 0.85rem;
+  padding: 0.4rem 1rem;
+  color: #555;
+  font-size: 0.92rem;
+}
+
+.prose table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  width: auto;
+}
+
+.prose th, .prose td {
+  border: 1px solid #ddd;
+  padding: 0.4rem 0.75rem;
+  text-align: left;
+}
+
+.prose th { background: #f5f5f5; font-weight: 600; }
+.prose tr:nth-child(even) td { background: #fafafa; }
+
+.math-block {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.05rem;
+}
+
+.try-btn {
+  display: inline-block;
+  margin: 0.25rem 0 1rem;
+  padding: 0.4rem 0.9rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.try-btn:hover { background: #1565c0; }
