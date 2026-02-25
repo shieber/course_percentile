@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background – Course Grade Percentile Ranker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <p class="subtitle" style="margin-bottom:1.5rem">
+    ← <a href="index.html">Back to the app</a>
+  </p>
+  <div id="content" class="prose"></div>
+</div>
+
+<script>
+  function tryExample(csv) {
+    window.location.href = 'index.html?data=' + encodeURIComponent(csv);
+  }
+
+  async function loadBackground() {
+    const resp = await fetch('background.md');
+    if (!resp.ok) {
+      document.getElementById('content').textContent =
+        'Error loading background.md: ' + resp.status;
+      return;
+    }
+    let md = await resp.text();
+
+    // Protect $$...$$ blocks from marked's escaping by replacing them
+    // with placeholders, then restoring after parse.
+    const mathBlocks = [];
+    md = md.replace(/\$\$[\s\S]+?\$\$/g, m => {
+      mathBlocks.push(m);
+      return `@@MATH${mathBlocks.length - 1}@@`;
+    });
+
+    let html = marked.parse(md);
+
+    html = html.replace(/@@MATH(\d+)@@/g, (_, i) => mathBlocks[i]);
+
+    document.getElementById('content').innerHTML = html;
+
+    if (window.MathJax) {
+      MathJax.typesetPromise([document.getElementById('content')]);
+    }
+  }
+
+  loadBackground();
+</script>
+</body>
+</html>
