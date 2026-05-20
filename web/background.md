@@ -6,8 +6,8 @@ This tool assigns each student in a course a **percentile rank** based on
 their letter grade and, optionally, a numerical score (such as a final exam
 score, a composite score, or a score representing rank within letter grade).
 The percentile rank is a number from 0 to 100 indicating where the student
-stands relative to everyone else in the course: a student at the 80th
-percentile performed better than 80% of their peers.
+stands relative to everyone else in the course: informally speaking, a 
+student at the 80th percentile performed at or above about 80% of their peers.
 
 ## Why percentile rank?
 
@@ -15,7 +15,7 @@ Raw letter grades and GPAs are useful but inherently *absolute* measures:
 they don't account for differences in grading standards across courses,
 instructors, or departments. A 3.7 earned in a course that gives mostly A's
 carries different information than a 3.7 earned in a course with a broader
-grade distribution.
+grade distribution, but GPA doesn't capture that information.
 
 Percentile rank *normalizes* across courses. A student at the 80th percentile
 of their course is in the top fifth of that course, regardless of whether the
@@ -27,7 +27,7 @@ more informative for distinguishing students within a course.
 
 ## Ranking method
 
-Students are ranked using a two-level sort:
+In this tool, students are ranked using a two-level sort:
 
 1. **Letter grade (primary):** Students with higher grades always rank above
    students with lower grades. The grade order, from best to worst, is:
@@ -143,11 +143,12 @@ The optional score field supports two distinct workflows:
 Here the score provides genuine performance information *across* grade
 boundaries. If a lower-graded student scores higher than a higher-graded
 student, the tool issues a **warning** but continues — the ranking still
-respects grade order, but the inconsistency may reflect a data error.
+respects grade order, but the inconsistency may reflect a data error or 
+the use of intra-grade ranking.
 
 **2. Intra-grade ranking** (ranks within each letter grade). Here the
 instructor can make finer distinctions *within* each grade without having a
-single numerical score. For example:
+single numerical score across all students. For example:
 
 | Student  | Grade | Score |
 |----------|-------|-------|
@@ -186,3 +187,10 @@ exactly the ordering needed to reproduce itself.
 
 This web app runs entirely in your browser using
 [Pyodide](https://pyodide.org). **No data is sent to any server.**
+
+---
+
+## Source code
+
+The ranking logic, CLI, tests, and this web app are published in the public
+repository [github.com/shieber/course_percentile](https://github.com/shieber/course_percentile).

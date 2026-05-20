@@ -21,20 +21,30 @@ a non-zero exit with a message. No data leaves your machine.
 
 ### Web app
 
-No Python installation or `pip install` is needed — the app runs entirely
-in the browser via Pyodide, which downloads automatically from a CDN.
+The ranking runs entirely in your browser via
+[Pyodide](https://pyodide.org), which downloads from a CDN automatically.
+You do **not** need Python or `pip install` to use the web app — only a
+browser. No data is uploaded anywhere.
 
-Because the app fetches `rank_to_percentile.py` at startup, it must be
-served over HTTP rather than opened as a local file. The simplest way
-(Python is already on your machine for the CLI):
+**Hosted demo** (simplest): open
+[https://shieber.github.io/course_percentile/](https://shieber.github.io/course_percentile/)
+in your browser. That URL redirects to the app; you can also use
+[https://shieber.github.io/course_percentile/web/](https://shieber.github.io/course_percentile/web/)
+directly.
+
+**Local demo** (optional, for development): the hosted URLs above work
+because GitHub serves the app like a normal website. To run the same app from
+a copy of the repo on your machine, you need the same kind of setup — a tiny
+local web server so you can open `http://localhost:8000/web/` instead of
+double-clicking `web/index.html` (which fails). If you have Python installed
+for the CLI, from the repo root run:
 
 ```bash
-# from the repo root
 python -m http.server 8000
 ```
 
-Then open `http://localhost:8000/web/` in your browser. No data is
-uploaded anywhere.
+Then open `http://localhost:8000/web/` in your browser. The ranking still
+happens in the browser, same as on GitHub Pages.
 
 ## Input format
 
